@@ -60,6 +60,12 @@
     <Compile Include="LinqExpressionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\app\MathNet.Palladium\MathNet.Palladium.csproj">
+      <Project>{96F70E7A-18FD-4A26-B833-797791DC761A}</Project>
+      <Name>MathNet.Palladium</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
