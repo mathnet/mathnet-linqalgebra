@@ -19,12 +19,15 @@ namespace MathNet.Palladium.Test
 
             Assert.AreEqual(ExpressionType.Lambda, add.NodeType);
             Assert.IsInstanceOfType(typeof(LambdaExpression), add);
+            Assert.AreEqual("(x, y) => (x + y)", add.ToString());
 
             Expression addBody = add.Body;
             Assert.AreEqual(ExpressionType.Add, addBody.NodeType);
             Assert.IsInstanceOfType(typeof(BinaryExpression), addBody);
+            Assert.AreEqual("(x + y)", addBody.ToString());
 
             BinaryExpression addBodyBinary = (BinaryExpression)addBody;
+            Assert.IsNull(addBodyBinary.Method);
         }
 
         [Test]
@@ -34,15 +37,16 @@ namespace MathNet.Palladium.Test
 
             Assert.AreEqual(ExpressionType.Lambda, gamma.NodeType);
             Assert.IsInstanceOfType(typeof(LambdaExpression), gamma);
+            Assert.AreEqual("x => Gamma(x)", gamma.ToString());
 
             Expression gammaBody = gamma.Body;
             Assert.AreEqual(ExpressionType.Call, gammaBody.NodeType);
             Assert.IsInstanceOfType(typeof(MethodCallExpression), gammaBody);
+            Assert.AreEqual("Gamma(x)", gammaBody.ToString());
 
             MethodCallExpression gammaBodyCall = (MethodCallExpression)gammaBody;
             Assert.IsNull(gammaBodyCall.Object);
             Assert.IsNotNull(gammaBodyCall.Method);
-
             Assert.AreEqual(typeof(Fn).GetMethod("Gamma"), gammaBodyCall.Method);
         }
     }
