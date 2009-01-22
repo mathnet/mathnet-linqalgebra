@@ -1,0 +1,39 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Text;
+using NUnit.Framework;
+
+namespace MathNet.Palladium.Test
+{
+    using MathNet.Palladium.ExpressionAlgebra;
+
+    [TestFixture]
+    public class ExpressionAlgebraSimplifyTests
+    {
+        [Test]
+        public void TestSimplifyTernaryQuotient()
+        {
+            Expression<Func<double, double>> lambda = x => x / 2 / Math.PI;
+            Assert.AreEqual(String.Format("((x / 2) / {0})", Math.PI), lambda.Body.ToString());
+
+            Expression simplified = AutoSimplify.SimplifyFactors(lambda.Body);
+            Assert.AreEqual(ExpressionType.Divide, simplified.NodeType);
+            Assert.IsInstanceOfType(typeof(BinaryExpression), simplified);
+            Assert.AreEqual(String.Format("(x / (2 * {0}))", Math.PI), simplified.ToString());
+        }
+
+        [Test]
+        public void TestSimplifyCrazyFactors()
+        {
+            Expression<Func<double, double, double, double, double>> lambda = (a, b, c, d) => (a / b / (c * a)) * (c * d / a) / d;
+            Assert.AreEqual("((((a / b) / (c * a)) * ((c * d) / a)) / d)", lambda.Body.ToString());
+
+            Expression simplified = AutoSimplify.SimplifyFactors(lambda.Body);
+            Assert.AreEqual(ExpressionType.Divide, simplified.NodeType);
+            Assert.IsInstanceOfType(typeof(BinaryExpression), simplified);
+            Assert.AreEqual("(((c * d) * a) / ((((a * c) * a) * b) * d))", simplified.ToString());
+        }
+    }
+}
