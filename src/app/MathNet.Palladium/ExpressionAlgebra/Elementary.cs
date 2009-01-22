@@ -41,5 +41,42 @@ namespace MathNet.Palladium.ExpressionAlgebra
 
             return binary.Right;
         }
+
+        /// <summary>
+        /// Collect all factors (including inverse factors in case of a quotient) of the provided term.
+        /// This algorithm does not apply any factorization.
+        /// </summary>
+        public static List<Expression> Factors(Expression product)
+        {
+            List<Expression> list = new List<Expression>();
+            CollectFactorsRecursive(product, list, false);
+            return list;
+        }
+
+        static void CollectFactorsRecursive(Expression term, List<Expression> factors, bool denominator)
+        {
+            if(term.NodeType == ExpressionType.Multiply)
+            {
+                BinaryExpression binary = (BinaryExpression)term;
+                CollectFactorsRecursive(binary.Left, factors, denominator);
+                CollectFactorsRecursive(binary.Right, factors, denominator);
+                return;
+            }
+
+            if(term.NodeType == ExpressionType.Divide)
+            {
+                BinaryExpression binary = (BinaryExpression)term;
+                CollectFactorsRecursive(binary.Left, factors, denominator);
+                CollectFactorsRecursive(binary.Right, factors, !denominator);
+                return;
+            }
+
+            if(denominator)
+            {
+                term = Expression.Divide(Expression.Constant(1d), term);
+            }
+
+            factors.Add(term);
+        }
     }
 }
