@@ -49,14 +49,14 @@ namespace MathNet.Palladium.ExpressionAlgebra
             {
                 BinaryExpression nominatorQuotient = (BinaryExpression)nominator;
                 nominator = nominatorQuotient.Left;
-                denominator = SimpleProduct(nominatorQuotient.Right, denominator, null);
+                denominator = SimpleProduct(denominator, nominatorQuotient.Right, null);
             }
 
             // ensure "denominator" is no quotient
             if(denominator.NodeType == ExpressionType.Divide)
             {
                 BinaryExpression denominatorQuotient = (BinaryExpression)denominator;
-                nominator = SimpleProduct(denominatorQuotient.Right, nominator, null);
+                nominator = SimpleProduct(nominator, denominatorQuotient.Right, null);
                 denominator = denominatorQuotient.Left;
             }
 
@@ -85,7 +85,7 @@ namespace MathNet.Palladium.ExpressionAlgebra
             if(left.NodeType == ExpressionType.Divide)
             {
                 BinaryExpression leftQuotient = (BinaryExpression)left;
-                Expression nominator = SimpleProduct(leftQuotient.Left, right, null);
+                Expression nominator = SimpleProduct(right, leftQuotient.Left, null);
                 return SimpleQuotient(nominator, leftQuotient.Right, null);
             }
 
@@ -93,7 +93,7 @@ namespace MathNet.Palladium.ExpressionAlgebra
             if(right.NodeType == ExpressionType.Divide)
             {
                 BinaryExpression rightQuotient = (BinaryExpression)right;
-                Expression nominator = SimpleProduct(rightQuotient.Left, left, null);
+                Expression nominator = SimpleProduct(left, rightQuotient.Left, null);
                 return SimpleQuotient(nominator, rightQuotient.Right, null);
             }
 

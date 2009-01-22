@@ -21,7 +21,7 @@ namespace MathNet.Palladium.Test
             Expression simplified = AutoSimplify.SimplifyFactors(lambda.Body);
             Assert.AreEqual(ExpressionType.Divide, simplified.NodeType);
             Assert.IsInstanceOfType(typeof(BinaryExpression), simplified);
-            Assert.AreEqual(String.Format("(x / (2 * {0}))", Math.PI), simplified.ToString());
+            Assert.AreEqual(String.Format("(x / ({0} * 2))", Math.PI), simplified.ToString());
         }
 
         [Test]
@@ -33,7 +33,7 @@ namespace MathNet.Palladium.Test
             Expression simplified = AutoSimplify.SimplifyFactors(lambda.Body);
             Assert.AreEqual(ExpressionType.Divide, simplified.NodeType);
             Assert.IsInstanceOfType(typeof(BinaryExpression), simplified);
-            Assert.AreEqual("(((c * d) * a) / ((((a * c) * a) * b) * d))", simplified.ToString());
+            Assert.AreEqual("(((a * d) * c) / ((((d * a) * b) * a) * c))", simplified.ToString());
         }
     }
 }
