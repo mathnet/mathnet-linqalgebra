@@ -31,6 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MathNet.Iridium, Version=2008.10.17.479, Culture=neutral, PublicKeyToken=c061a3ec32cc0c6f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\lib\MathNet.Iridium\MathNet.Iridium.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -45,6 +49,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExpressionAlgebra\Arithmeric.cs" />
+    <Compile Include="ExpressionAlgebra\Exponential.cs" />
+    <Compile Include="ExpressionAlgebra\ExpressionBuilder.cs" />
+    <Compile Include="ExpressionAlgebra\PartialDerivative.cs" />
+    <Compile Include="ExpressionAlgebra\Trigonometry.cs" />
+    <Compile Include="ExpressionAlgebra\TypeInference.cs" />
+    <Compile Include="ExpressionAlgebra\Visitors\AlgebraicVisitor.cs" />
+    <Compile Include="ExpressionAlgebra\Visitors\ExpressionVisitor.cs" />
+    <Compile Include="ExpressionAlgebra\AutoSimplify.cs" />
+    <Compile Include="ExpressionAlgebra\Elementary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
