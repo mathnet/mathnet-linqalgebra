@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using System.Reflection;
 
 namespace MathNet.Palladium.ExpressionAlgebra
 {
@@ -36,6 +37,16 @@ namespace MathNet.Palladium.ExpressionAlgebra
             }
 
             return expression;
+        }
+
+        public static Expression CallDouble(MethodInfo method, Expression expression)
+        {
+            return Expression.Call(method, ConvertDouble(expression));
+        }
+
+        public static Expression CallDouble(MethodInfo method, Expression a, Expression b)
+        {
+            return Expression.Call(method, ConvertDouble(a), ConvertDouble(b));
         }
     }
 }

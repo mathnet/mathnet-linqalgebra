@@ -7,14 +7,20 @@ namespace MathNet.Palladium.ExpressionAlgebra
     {
         static readonly Type _mathType = typeof(Math);
 
-        public static Expression NaturalLogarithm(Expression term)
+        /// <summary>
+        /// Natural Logarithm
+        /// </summary>
+        public static Expression Ln(Expression term)
         {
-            return Expression.Call(_mathType.GetMethod("Log"), ExpressionBuilder.ConvertDouble(term));
+            return ExpressionBuilder.CallDouble(_mathType.GetMethod("Log"), term);
         }
 
-        public static Expression Exponential(Expression term)
+        /// <summary>
+        /// Exponential
+        /// </summary>
+        public static Expression Exp(Expression term)
         {
-            return Expression.Call(_mathType.GetMethod("Exp"), ExpressionBuilder.ConvertDouble(term));
+            return ExpressionBuilder.CallDouble(_mathType.GetMethod("Exp"), term);
         }
     }
 }

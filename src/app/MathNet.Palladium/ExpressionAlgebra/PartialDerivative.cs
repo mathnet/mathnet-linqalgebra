@@ -73,11 +73,7 @@ namespace MathNet.Palladium.ExpressionAlgebra
                 Arithmeric.Add(
                     Arithmeric.Multiply(
                         rightDerivative,
-                        Expression.Call(
-                            typeof(Math),
-                            "Ln",
-                            null,
-                            binaryExpression.Left)),
+                        Exponential.Ln(binaryExpression.Left)),
                     Arithmeric.Divide(
                         Arithmeric.Multiply(binaryExpression.Right, leftDerivative),
                         binaryExpression.Left)));
