@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 
 namespace MathNet.Palladium.ExpressionAlgebra
 {
@@ -25,40 +24,54 @@ namespace MathNet.Palladium.ExpressionAlgebra
 
         public static Expression Add(params Expression[] terms)
         {
-            // TODO: automatic simplification
-
             TypeInference type = new TypeInference(terms);
             return type.CastToMaxNumeric()
-                .Where(x => (x.NodeType != ExpressionType.Constant) || (Convert.ToDouble(((ConstantExpression)x).Value) != 0d))
+                .Where(x => !Elementary.IsConstantZero(x))
                 .Reduce(Expression.Add, Zero());
         }
 
         public static Expression Subtract(Expression a, Expression b)
         {
-            // TODO: automatic simplification
+            if(Elementary.IsConstantZero(a))
+            {
+                return Negate(b);
+            }
+
+            if(Elementary.IsConstantZero(b))
+            {
+                return a;
+            }
 
             TypeInference type = new TypeInference(a, b);
             List<Expression> expressions = type.CastToMaxNumericList();
             return Expression.Subtract(expressions[0], expressions[1]);
         }
 
-        public static Expression Negate(Expression a)
+        public static Expression Negate(Expression term)
         {
-            // TODO: automatic simplification
+            if(Elementary.IsConstantZero(term))
+            {
+                return Arithmeric.Zero();
+            }
 
-            return Expression.Negate(a);
+            if(term.NodeType == ExpressionType.Negate)
+            {
+                UnaryExpression unary = (UnaryExpression)term;
+                return unary.Operand;
+            }
+
+            return Expression.Negate(term);
         }
 
         public static Expression Multiply(params Expression[] terms)
         {
-            // TODO: automatic simplification
 
             TypeInference type = new TypeInference(terms);
             List<Expression> factors = type.CastToMaxNumeric()
-                .Where(x => (x.NodeType != ExpressionType.Constant) || (Convert.ToDouble(((ConstantExpression)x).Value) != 1d))
+                .Where(x => !Elementary.IsConstantOne(x))
                 .ToList();
 
-            if(factors.Exists(x => (x.NodeType == ExpressionType.Constant) && (Convert.ToDouble(((ConstantExpression)x).Value) == 0d)))
+            if(factors.Exists(Elementary.IsConstantZero))
             {
                 return Zero();
             }
@@ -68,18 +81,26 @@ namespace MathNet.Palladium.ExpressionAlgebra
 
         public static Expression Divide(Expression a, Expression b)
         {
-            // TODO: automatic simplification
+            if(Elementary.IsConstantZero(a))
+            {
+                return Arithmeric.Zero();
+            }
+
+            if(Elementary.IsConstantOne(b))
+            {
+                return a;
+            }
 
             TypeInference type = new TypeInference(a, b);
             List<Expression> expressions = type.CastToMaxNumericList();
             return Expression.Divide(expressions[0], expressions[1]);
         }
 
-        public static Expression Invert(Expression a)
+        public static Expression Invert(Expression term)
         {
             // TODO: automatic simplification
 
-            return Divide(Expression.Constant(1), a);
+            return Divide(Expression.Constant(1), term);
         }
 
         public static Expression Power(Expression a, Expression b)

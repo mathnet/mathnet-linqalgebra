@@ -71,6 +71,7 @@ namespace MathNet.Palladium.Test
             */
         }
 
+        [Test]
         public void TestDeriveSineInv()
         {
             Expression<Func<double, double>> lambda = x => Math.Sin(1d/x);
@@ -78,7 +79,7 @@ namespace MathNet.Palladium.Test
             PartialDerivative pd = new PartialDerivative();
             Expression derivative = pd.Differentiate(lambda.Body, "x");
             Assert.AreEqual(ExpressionType.Multiply, derivative.NodeType);
-            Assert.AreEqual("(-(1 / (x * x)) * Cosine(1 / x))", derivative.ToString());
+            Assert.AreEqual("(-(1 / (x * x)) * Cosine((1 / x)))", derivative.ToString());
         }
     }
 }

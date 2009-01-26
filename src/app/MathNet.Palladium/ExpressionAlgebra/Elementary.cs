@@ -1,13 +1,41 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 
 namespace MathNet.Palladium.ExpressionAlgebra
 {
+    using MathNet.Numerics;
+
     public static class Elementary
     {
+        public static bool IsConstantAlmost(Expression term, double expected)
+        {
+            if(term.NodeType == ExpressionType.Convert)
+            {
+                // TODO: do we need 'while' instead of 'if' here?
+                UnaryExpression conv = (UnaryExpression)term;
+                term = conv.Operand;
+            }
+
+            if(term.NodeType != ExpressionType.Constant)
+            {
+                return false;
+            }
+
+            ConstantExpression constExpr = (ConstantExpression)term;
+            return Number.AlmostEqual(Convert.ToDouble(constExpr.Value), expected);
+        }
+
+        public static bool IsConstantOne(Expression term)
+        {
+            return IsConstantAlmost(term, 1d);
+        }
+
+        public static bool IsConstantZero(Expression term)
+        {
+            return IsConstantAlmost(term, 0d);
+        }
+
         public static Expression Numerator(Expression quotient)
         {
             if(quotient.NodeType != ExpressionType.Divide)
