@@ -52,6 +52,7 @@
     <Compile Include="ExpressionAlgebra\Arithmeric.cs" />
     <Compile Include="ExpressionAlgebra\ExpressionBuilder.cs" />
     <Compile Include="ExpressionAlgebra\PartialDerivative.cs" />
+    <Compile Include="ExpressionAlgebra\Trigonometry.cs" />
     <Compile Include="ExpressionAlgebra\TypeInference.cs" />
     <Compile Include="ExpressionAlgebra\Visitors\AlgebraicVisitor.cs" />
     <Compile Include="ExpressionAlgebra\Visitors\ExpressionVisitor.cs" />

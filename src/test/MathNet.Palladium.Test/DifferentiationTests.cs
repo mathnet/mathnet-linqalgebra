@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using NUnit.Framework;
 
 namespace MathNet.Palladium.Test
@@ -53,7 +50,7 @@ namespace MathNet.Palladium.Test
             PartialDerivative pd = new PartialDerivative();
             Expression derivative = pd.Differentiate(lambda.Body, "x");
             Assert.AreEqual(ExpressionType.Call, derivative.NodeType);
-            Assert.AreEqual("Cos(x)", derivative.ToString());
+            Assert.AreEqual("Cosine(x)", derivative.ToString());
         }
     }
 }

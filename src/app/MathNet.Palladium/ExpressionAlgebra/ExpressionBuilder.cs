@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 
 namespace MathNet.Palladium.ExpressionAlgebra
 {
@@ -17,6 +15,16 @@ namespace MathNet.Palladium.ExpressionAlgebra
             }
 
             return sum ?? defaultIfEmpty;
+        }
+
+        public static Expression CastToDouble(Expression expression)
+        {
+            if(expression.Type != typeof(double))
+            {
+                return Expression.Convert(expression, typeof(double));
+            }
+
+            return expression;
         }
     }
 }

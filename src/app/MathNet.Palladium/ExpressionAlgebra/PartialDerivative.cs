@@ -93,11 +93,7 @@ namespace MathNet.Palladium.ExpressionAlgebra
                         Expression innerDerivative = base.Visit(m.Arguments[0]);
                         return Arithmeric.Multiply(
                             innerDerivative,
-                            Expression.Call(
-                                typeof(Math),
-                                "Cos",
-                                null,
-                                m.Arguments[0]));
+                            Trigonometry.Cosine(m.Arguments[0]));
                     }
                 default:
                     throw new NotSupportedException(String.Format("Method Call to {0} is not supported.", m.ToString()));
