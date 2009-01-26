@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using NUnit.Framework;
 
 namespace MathNet.Palladium.Test
 {
+    using MathNet.ExpressionAlgebra;
     using MathNet.Numerics;
-    using MathNet.Palladium.ExpressionAlgebra;
 
     [TestFixture]
     public class ExpressionAlgebraElementaryTests

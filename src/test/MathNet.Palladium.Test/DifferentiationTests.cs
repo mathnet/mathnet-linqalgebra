@@ -4,7 +4,7 @@ using NUnit.Framework;
 
 namespace MathNet.Palladium.Test
 {
-    using MathNet.Palladium.ExpressionAlgebra;
+    using MathNet.ExpressionAlgebra;
 
     [TestFixture]
     public class DifferentiationTests

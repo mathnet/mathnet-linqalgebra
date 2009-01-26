@@ -8,7 +8,7 @@
     <ProjectGuid>{96F70E7A-18FD-4A26-B833-797791DC761A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MathNet.Palladium</RootNamespace>
+    <RootNamespace>MathNet.ExpressionAlgebra</RootNamespace>
     <AssemblyName>MathNet.Palladium</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
