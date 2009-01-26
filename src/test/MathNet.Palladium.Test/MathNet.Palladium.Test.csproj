@@ -58,6 +58,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DifferentiationTests.cs" />
+    <Compile Include="ExpressionAlgebraElementaryTests.cs" />
+    <Compile Include="ExpressionAlgebraSimplifyTests.cs" />
     <Compile Include="LinqExpressionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

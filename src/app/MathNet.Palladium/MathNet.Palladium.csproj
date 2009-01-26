@@ -51,6 +51,8 @@
     <Compile Include="ExpressionAlgebra\TypeInference.cs" />
     <Compile Include="ExpressionAlgebra\Visitors\AlgebraicVisitor.cs" />
     <Compile Include="ExpressionAlgebra\Visitors\ExpressionVisitor.cs" />
+    <Compile Include="ExpressionAlgebra\AutoSimplify.cs" />
+    <Compile Include="ExpressionAlgebra\Elementary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
