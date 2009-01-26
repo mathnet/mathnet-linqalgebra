@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Math.NET.Palladium")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Math.NET Palladium: Linq Expression Computer Algebra")]
+[assembly: AssemblyDescription("http://mathnet.opensourcedotnet.info/")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Math.NET.Palladium")]
-[assembly: AssemblyCopyright("Copyright ©  2009")]
+[assembly: AssemblyCompany("Math.NET Project")]
+[assembly: AssemblyProduct("Math.NET")]
+[assembly: AssemblyCopyright("Copyright © 2009, Math.NET Project")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
