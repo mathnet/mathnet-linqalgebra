@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExpressionAlgebra\Arithmeric.cs" />
+    <Compile Include="ExpressionAlgebra\Exponential.cs" />
     <Compile Include="ExpressionAlgebra\ExpressionBuilder.cs" />
     <Compile Include="ExpressionAlgebra\PartialDerivative.cs" />
     <Compile Include="ExpressionAlgebra\Trigonometry.cs" />

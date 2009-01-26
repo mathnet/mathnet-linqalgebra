@@ -10,17 +10,17 @@ namespace MathNet.Palladium.ExpressionAlgebra
     {
         public static Expression Zero()
         {
-            return Expression.Constant(0d, typeof(double));
+            return ExpressionBuilder.ConstantDouble(0d);
         }
 
         public static Expression One()
         {
-            return Expression.Constant(1d, typeof(double));
+            return ExpressionBuilder.ConstantDouble(1d);
         }
 
         public static Expression MinusOne()
         {
-            return Expression.Constant(-1d, typeof(double));
+            return ExpressionBuilder.ConstantDouble(-1d);
         }
 
         public static Expression Add(params Expression[] terms)

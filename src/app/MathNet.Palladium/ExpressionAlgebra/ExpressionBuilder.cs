@@ -17,10 +17,21 @@ namespace MathNet.Palladium.ExpressionAlgebra
             return sum ?? defaultIfEmpty;
         }
 
-        public static Expression CastToDouble(Expression expression)
+        public static Expression ConstantDouble(double value)
+        {
+            return Expression.Constant(value, typeof(double));
+        }
+
+        public static Expression ConvertDouble(Expression expression)
         {
             if(expression.Type != typeof(double))
             {
+                if(expression.NodeType == ExpressionType.Constant)
+                {
+                    ConstantExpression constExpr = (ConstantExpression)expression;
+                    return ConstantDouble(Convert.ToDouble(constExpr.Value));
+                }
+
                 return Expression.Convert(expression, typeof(double));
             }
 
