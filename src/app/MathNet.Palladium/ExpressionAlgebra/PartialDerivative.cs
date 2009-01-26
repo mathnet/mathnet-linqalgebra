@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 
 namespace MathNet.Palladium.ExpressionAlgebra
 {
@@ -90,6 +87,15 @@ namespace MathNet.Palladium.ExpressionAlgebra
                         return Arithmeric.Multiply(
                             innerDerivative,
                             Trigonometry.Cosine(m.Arguments[0]));
+                    }
+                case "Cos":
+                case "Cosine":
+                    {
+                        Expression innerDerivative = base.Visit(m.Arguments[0]);
+                        return Arithmeric.Negate(
+                            Arithmeric.Multiply(
+                                innerDerivative,
+                                Trigonometry.Sine(m.Arguments[0])));
                     }
                 default:
                     throw new NotSupportedException(String.Format("Method Call to {0} is not supported.", m.ToString()));
