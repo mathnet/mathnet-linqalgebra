@@ -45,6 +45,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExpressionAlgebra\Arithmeric.cs" />
+    <Compile Include="ExpressionAlgebra\ExpressionBuilder.cs" />
+    <Compile Include="ExpressionAlgebra\TypeInference.cs" />
     <Compile Include="ExpressionAlgebra\Visitors\AlgebraicVisitor.cs" />
     <Compile Include="ExpressionAlgebra\Visitors\ExpressionVisitor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

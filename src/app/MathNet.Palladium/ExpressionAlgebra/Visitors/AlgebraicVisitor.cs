@@ -47,39 +47,75 @@ namespace MathNet.Palladium.ExpressionAlgebra.Visitors
             }
         }
 
-        protected virtual Expression VisitAdd(BinaryExpression binaryExpression)
+        protected virtual Expression VisitAdd(BinaryExpression term)
         {
-            return base.VisitBinary(binaryExpression);
+            Expression newLeft = Visit(term.Left);
+            Expression newRight = Visit(term.Right);
+            if(newLeft != term.Left || newRight != term.Right)
+            {
+                return Arithmeric.Add(newLeft, newRight);
+            }
+
+            return term;
         }
 
-        protected virtual Expression VisitPower(BinaryExpression binaryExpression)
+        protected virtual Expression VisitSubtract(BinaryExpression term)
         {
-            return base.VisitBinary(binaryExpression);
+            Expression newLeft = Visit(term.Left);
+            Expression newRight = Visit(term.Right);
+            if(newLeft != term.Left || newRight != term.Right)
+            {
+                return Arithmeric.Subtract(newLeft, newRight);
+            }
+
+            return term;
         }
 
-        protected virtual Expression VisitDivide(BinaryExpression binaryExpression)
+        protected virtual Expression VisitPlus(UnaryExpression term)
         {
-            return base.VisitBinary(binaryExpression);
+            return base.VisitUnary(term);
         }
 
-        protected virtual Expression VisitMultiply(BinaryExpression binaryExpression)
+        protected virtual Expression VisitMinus(UnaryExpression term)
         {
-            return base.VisitBinary(binaryExpression);
+            return base.VisitUnary(term);
         }
 
-        protected virtual Expression VisitSubtract(BinaryExpression binaryExpression)
+        protected virtual Expression VisitMultiply(BinaryExpression term)
         {
-            return base.VisitBinary(binaryExpression);
+            Expression newLeft = Visit(term.Left);
+            Expression newRight = Visit(term.Right);
+            if(newLeft != term.Left || newRight != term.Right)
+            {
+                return Arithmeric.Multiply(newLeft, newRight);
+            }
+
+            return term;
         }
 
-        protected virtual Expression VisitPlus(UnaryExpression unaryExpression)
+        protected virtual Expression VisitDivide(BinaryExpression term)
         {
-            return base.VisitUnary(unaryExpression);
+            Expression newLeft = Visit(term.Left);
+            Expression newRight = Visit(term.Right);
+            if(newLeft != term.Left || newRight != term.Right)
+            {
+                return Arithmeric.Divide(newLeft, newRight);
+            }
+
+            return term;
         }
 
-        protected virtual Expression VisitMinus(UnaryExpression unaryExpression)
+        protected virtual Expression VisitPower(BinaryExpression term)
         {
-            return base.VisitUnary(unaryExpression);
+
+            Expression newLeft = Visit(term.Left);
+            Expression newRight = Visit(term.Right);
+            if(newLeft != term.Left || newRight != term.Right)
+            {
+                return Arithmeric.Power(newLeft, newRight);
+            }
+
+            return term;
         }
     }
 }
