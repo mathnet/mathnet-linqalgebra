@@ -49,16 +49,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ExpressionAlgebra\Arithmeric.cs" />
-    <Compile Include="ExpressionAlgebra\Exponential.cs" />
-    <Compile Include="ExpressionAlgebra\ExpressionBuilder.cs" />
-    <Compile Include="ExpressionAlgebra\PartialDerivative.cs" />
-    <Compile Include="ExpressionAlgebra\Trigonometry.cs" />
-    <Compile Include="ExpressionAlgebra\TypeInference.cs" />
-    <Compile Include="ExpressionAlgebra\Visitors\AlgebraicVisitor.cs" />
-    <Compile Include="ExpressionAlgebra\Visitors\ExpressionVisitor.cs" />
-    <Compile Include="ExpressionAlgebra\AutoSimplify.cs" />
-    <Compile Include="ExpressionAlgebra\Elementary.cs" />
+    <Compile Include="Arithmeric.cs" />
+    <Compile Include="Exponential.cs" />
+    <Compile Include="ExpressionBuilder.cs" />
+    <Compile Include="PartialDerivative.cs" />
+    <Compile Include="Trigonometry.cs" />
+    <Compile Include="TypeInference.cs" />
+    <Compile Include="Visitors\AlgebraicVisitor.cs" />
+    <Compile Include="Visitors\ExpressionVisitor.cs" />
+    <Compile Include="AutoSimplify.cs" />
+    <Compile Include="Elementary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
