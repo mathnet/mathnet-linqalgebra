@@ -52,6 +52,7 @@
     <Compile Include="Arithmeric.cs" />
     <Compile Include="Exponential.cs" />
     <Compile Include="ExpressionBuilder.cs" />
+    <Compile Include="Output\MathMLContentMarkupFormatter.cs" />
     <Compile Include="PartialDerivative.cs" />
     <Compile Include="Trigonometry.cs" />
     <Compile Include="TypeInference.cs" />

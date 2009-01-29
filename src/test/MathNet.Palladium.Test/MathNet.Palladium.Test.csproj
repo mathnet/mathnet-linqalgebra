@@ -61,6 +61,7 @@
     <Compile Include="ExpressionAlgebraElementaryTests.cs" />
     <Compile Include="ExpressionAlgebraSimplifyTests.cs" />
     <Compile Include="LinqExpressionTests.cs" />
+    <Compile Include="MathMLContentMarkupFormatterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
