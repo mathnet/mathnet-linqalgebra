@@ -55,8 +55,8 @@
     <Compile Include="PartialDerivative.cs" />
     <Compile Include="Trigonometry.cs" />
     <Compile Include="TypeInference.cs" />
-    <Compile Include="Visitors\AlgebraicVisitor.cs" />
-    <Compile Include="Visitors\ExpressionVisitor.cs" />
+    <Compile Include="Visitors\AlgebraicManipulator.cs" />
+    <Compile Include="Visitors\ExpressionManipulator.cs" />
     <Compile Include="AutoSimplify.cs" />
     <Compile Include="Elementary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

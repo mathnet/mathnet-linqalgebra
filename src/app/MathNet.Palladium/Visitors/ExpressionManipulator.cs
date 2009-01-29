@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="ExpressionVisitor.cs" company="Math.NET Project">
+// <copyright file="ExpressionManipulator.cs" company="Math.NET Project">
 //    Copyright (c) 2002-2009, Christoph Rüegg.
 //    All Right Reserved.
 // </copyright>
@@ -35,11 +35,11 @@ using System.Linq.Expressions;
 namespace MathNet.ExpressionAlgebra.Visitors
 {
     /// <summary>
-    /// Linq Expression Visitor Base
+    /// Linq Expression Manipulator Base
     /// </summary>
-    public abstract class ExpressionVisitor
+    public abstract class ExpressionManipulator
     {
-        protected ExpressionVisitor()
+        protected ExpressionManipulator()
         {
         }
 

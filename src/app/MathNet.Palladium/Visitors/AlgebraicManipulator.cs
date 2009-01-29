@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="AlgebraicVisitor.cs" company="Math.NET Project">
+// <copyright file="AlgebraicManipulator.cs" company="Math.NET Project">
 //    Copyright (c) 2002-2009, Christoph Rüegg.
 //    All Right Reserved.
 // </copyright>
@@ -32,11 +32,11 @@ using System.Linq.Expressions;
 namespace MathNet.ExpressionAlgebra.Visitors
 {
     /// <summary>
-    /// Alebraic Linq Expression Visitor Base
+    /// Alebraic Linq Expression Manipulator Base
     /// </summary>
-    public abstract class AlgebraicVisitor : ExpressionVisitor
+    public abstract class AlgebraicManipulator : ExpressionManipulator
     {
-        protected AlgebraicVisitor()
+        protected AlgebraicManipulator()
         {
         }
 

@@ -38,7 +38,7 @@ namespace MathNet.ExpressionAlgebra
     /// This class is stateful and not thread safe, therefore never share an instance
     /// between multiple threads (the ThreadStatic attribute might help).
     /// </remarks>
-    public class PartialDerivative : AlgebraicVisitor
+    public class PartialDerivative : AlgebraicManipulator
     {
         string _variableName;
 
