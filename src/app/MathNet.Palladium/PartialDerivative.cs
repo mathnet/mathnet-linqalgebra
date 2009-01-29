@@ -105,32 +105,43 @@ namespace MathNet.ExpressionAlgebra
                         binaryExpression.Left)));
         }
 
-        protected override Expression VisitMethodCall(MethodCallExpression m)
+
+        protected override Expression VisitTrigonometry(MethodCallExpression methodCall, TrigonometryFunction function)
         {
-            switch(m.Method.Name)
+            Expression argument = methodCall.Arguments[0];
+
+            switch(function)
             {
-                case "Sin":
-                case "Sine":
+                case TrigonometryFunction.Sine:
                     {
-                        Expression innerDerivative = Visit(m.Arguments[0]);
+                        Expression innerDerivative = Visit(argument);
                         return Arithmeric.Multiply(
                             innerDerivative,
-                            Trigonometry.Cosine(m.Arguments[0]));
+                            Trigonometry.Cosine(argument));
                     }
 
-                case "Cos":
-                case "Cosine":
+                case TrigonometryFunction.Cosine:
                     {
-                        Expression innerDerivative = Visit(m.Arguments[0]);
+                        Expression innerDerivative = Visit(argument);
                         return Arithmeric.Negate(
                             Arithmeric.Multiply(
                                 innerDerivative,
-                                Trigonometry.Sine(m.Arguments[0])));
+                                Trigonometry.Sine(argument)));
                     }
 
                 default:
-                    throw new NotSupportedException(String.Format("Method Call to {0} is not supported.", m.ToString()));
+                    throw new NotSupportedException(String.Format("Trigonometric function {0} is not supported.", function.ToString()));
             }
+        }
+
+        protected override Expression VisitExponential(MethodCallExpression methodCall, ExponentialFunction function)
+        {
+            throw new NotSupportedException(String.Format("Exponential function {0} is not supported.", function.ToString()));
+        }
+
+        protected override Expression VisitOtherMethodCall(MethodCallExpression expression)
+        {
+            throw new NotSupportedException(String.Format("Method Call to {0} is not supported.", expression.ToString()));
         }
     }
 }

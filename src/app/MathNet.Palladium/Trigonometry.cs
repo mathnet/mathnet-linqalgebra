@@ -73,7 +73,7 @@ namespace MathNet.ExpressionAlgebra
     {
         static readonly Type _trigType = typeof(Trig);
 
-        public static Expression Apply(Expression argument, TrigonometryFunction function)
+        public static Expression Apply(TrigonometryFunction function, Expression argument)
         {
             return ExpressionBuilder.CallDouble(_trigType, function.ToString(), argument);
         }
@@ -81,6 +81,45 @@ namespace MathNet.ExpressionAlgebra
         public static bool TryParse(MethodInfo method, out TrigonometryFunction function)
         {
             string name = method.Name;
+
+            if(method.DeclaringType == typeof(System.Math))
+            {
+                // We map System.Math.Sin(double) to Trig for better usability
+                switch(name)
+                {
+                    case "Sin":
+                        function = TrigonometryFunction.Sine;
+                        return true;
+                    case "Cos":
+                        function = TrigonometryFunction.Cosine;
+                        return true;
+                    case "Tan":
+                        function = TrigonometryFunction.Tangent;
+                        return true;
+                    case "Sinh":
+                        function = TrigonometryFunction.HyperbolicSine;
+                        return true;
+                    case "Cosh":
+                        function = TrigonometryFunction.HyperbolicCosine;
+                        return true;
+                    case "Tanh":
+                        function = TrigonometryFunction.HyperbolicTangent;
+                        return true;
+                    case "Asin":
+                        function = TrigonometryFunction.InverseSine;
+                        return true;
+                    case "Acos":
+                        function = TrigonometryFunction.InverseCosine;
+                        return true;
+                    case "Atan":
+                        function = TrigonometryFunction.InverseTangent;
+                        return true;
+                    default:
+                        function = (TrigonometryFunction)0;
+                        return false;
+                }
+            }
+
             if(!Enum.IsDefined(typeof(TrigonometryFunction), name))
             {
                 function = (TrigonometryFunction)0;

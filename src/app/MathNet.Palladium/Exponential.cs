@@ -49,7 +49,7 @@ namespace MathNet.ExpressionAlgebra
     {
         static readonly Type _mathType = typeof(Math);
 
-        public static Expression Apply(Expression argument, ExponentialFunction function)
+        public static Expression Apply(ExponentialFunction function, Expression argument)
         {
             switch(function)
             {

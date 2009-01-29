@@ -190,9 +190,9 @@ namespace MathNet.ExpressionAlgebra.Visitors
             return b;
         }
 
-        protected virtual Expression VisitConstant(ConstantExpression c)
+        protected virtual Expression VisitConstant(ConstantExpression constantExpression)
         {
-            return c;
+            return constantExpression;
         }
 
         protected virtual Expression VisitConditional(ConditionalExpression c)

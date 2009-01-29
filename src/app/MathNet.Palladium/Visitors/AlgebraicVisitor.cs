@@ -94,60 +94,60 @@ namespace MathNet.ExpressionAlgebra.Visitors
             }
         }
 
-        protected abstract T VisitConstant(ConstantExpression c);
+        protected abstract T VisitConstant(ConstantExpression term);
 
-        protected abstract T VisitParameter(ParameterExpression p);
+        protected abstract T VisitParameter(ParameterExpression term);
 
-        protected abstract T VisitAdd(BinaryExpression binaryExpression);
+        protected abstract T VisitAdd(BinaryExpression term);
 
-        protected abstract T VisitSubtract(BinaryExpression binaryExpression);
+        protected abstract T VisitSubtract(BinaryExpression term);
 
-        protected abstract T VisitPlus(UnaryExpression unaryExpression);
+        protected abstract T VisitPlus(UnaryExpression term);
 
-        protected abstract T VisitMinus(UnaryExpression unaryExpression);
+        protected abstract T VisitMinus(UnaryExpression term);
 
-        protected abstract T VisitMultiply(BinaryExpression binaryExpression);
+        protected abstract T VisitMultiply(BinaryExpression term);
 
-        protected abstract T VisitDivide(BinaryExpression binaryExpression);
+        protected abstract T VisitDivide(BinaryExpression term);
 
-        protected abstract T VisitPower(BinaryExpression binaryExpression);
+        protected abstract T VisitPower(BinaryExpression term);
 
-        protected abstract T VisitTrigonometry(MethodCallExpression methodCall, TrigonometryFunction function);
+        protected abstract T VisitTrigonometry(MethodCallExpression term, TrigonometryFunction function);
 
-        protected abstract T VisitExponential(MethodCallExpression methodCall, ExponentialFunction function);
+        protected abstract T VisitExponential(MethodCallExpression term, ExponentialFunction function);
 
-        protected virtual T VisitUnknown(Expression expression)
+        protected virtual T VisitOtherMethodCall(MethodCallExpression term)
         {
-            throw new NotSupportedException(string.Format("Unhandled expression type: '{0}'", expression.NodeType));
+            throw new NotSupportedException(string.Format("Unhandled expression method call: '{0}'", term.Method));
         }
 
-        protected virtual T VisitUnknownFunction(MethodCallExpression expression)
+        protected virtual T VisitUnknown(Expression term)
         {
-            throw new NotSupportedException(string.Format("Unhandled expression method call: '{0}'", expression.Method));
+            throw new NotSupportedException(string.Format("Unhandled expression type: '{0}'", term.NodeType));
         }
 
-        protected virtual T VisitConvert(UnaryExpression unaryExpression)
+        protected virtual T VisitConvert(UnaryExpression term)
         {
-            return Visit(unaryExpression.Operand);
+            return Visit(term.Operand);
         }
 
-        private T VisitMethodCallCore(MethodCallExpression methodCall)
+        private T VisitMethodCallCore(MethodCallExpression term)
         {
-            MethodInfo method = methodCall.Method;
+            MethodInfo method = term.Method;
 
             TrigonometryFunction trigFunction;
             if(Trigonometry.TryParse(method, out trigFunction))
             {
-                return VisitTrigonometry(methodCall, trigFunction);
+                return VisitTrigonometry(term, trigFunction);
             }
 
             ExponentialFunction expFunction;
             if(Exponential.TryParse(method, out expFunction))
             {
-                return VisitExponential(methodCall, expFunction);
+                return VisitExponential(term, expFunction);
             }
 
-            return VisitUnknownFunction(methodCall);
+            return VisitOtherMethodCall(term);
         }
     }
 }

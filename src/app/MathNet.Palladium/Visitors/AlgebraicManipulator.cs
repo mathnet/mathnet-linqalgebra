@@ -27,7 +27,10 @@
 // </license>
 //-----------------------------------------------------------------------
 
+using System.Collections.ObjectModel;
 using System.Linq.Expressions;
+using System.Reflection;
+using System;
 
 namespace MathNet.ExpressionAlgebra.Visitors
 {
@@ -141,6 +144,62 @@ namespace MathNet.ExpressionAlgebra.Visitors
             if(newLeft != term.Left || newRight != term.Right)
             {
                 return Arithmeric.Power(newLeft, newRight);
+            }
+
+            return term;
+        }
+
+        protected override Expression VisitMethodCall(MethodCallExpression term)
+        {
+            MethodInfo method = term.Method;
+
+            TrigonometryFunction trigFunction;
+            if(Trigonometry.TryParse(method, out trigFunction))
+            {
+                return VisitTrigonometry(term, trigFunction);
+            }
+
+            ExponentialFunction expFunction;
+            if(Exponential.TryParse(method, out expFunction))
+            {
+                return VisitExponential(term, expFunction);
+            }
+
+            return VisitOtherMethodCall(term);
+        }
+
+        protected virtual Expression VisitOtherMethodCall(MethodCallExpression term)
+        {
+            return base.VisitMethodCall(term);
+        }
+
+        protected virtual Expression VisitTrigonometry(MethodCallExpression term, TrigonometryFunction function)
+        {
+            ReadOnlyCollection<Expression> newArguments = VisitExpressionList(term.Arguments);
+            if(newArguments != term.Arguments)
+            {
+                if(newArguments.Count != 1)
+                {
+                    throw new InvalidOperationException("Single Argument Expected.");
+                }
+
+                return Trigonometry.Apply(function, newArguments[0]);
+            }
+
+            return term;
+        }
+
+        protected virtual Expression VisitExponential(MethodCallExpression term, ExponentialFunction function)
+        {
+            ReadOnlyCollection<Expression> newArguments = VisitExpressionList(term.Arguments);
+            if(newArguments != term.Arguments)
+            {
+                if(newArguments.Count != 1)
+                {
+                    throw new InvalidOperationException("Single Argument Expected.");
+                }
+
+                return Exponential.Apply(function, newArguments[0]);
             }
 
             return term;
