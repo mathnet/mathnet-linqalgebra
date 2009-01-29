@@ -36,6 +36,9 @@ namespace MathNet.ExpressionAlgebra
 {
     internal static class ExpressionBuilder
     {
+        static readonly Type[] _oneDouble = new Type[] { typeof(double) };
+        static readonly Type[] _twoDoubles = new Type[] { typeof(double), typeof(double) };
+
         public static Expression Reduce(this IEnumerable<Expression> terms, Func<Expression, Expression, Expression> map, Expression defaultIfEmpty)
         {
             Expression sum = null;
@@ -76,6 +79,16 @@ namespace MathNet.ExpressionAlgebra
         public static Expression CallDouble(MethodInfo method, Expression a, Expression b)
         {
             return Expression.Call(method, ConvertDouble(a), ConvertDouble(b));
+        }
+
+        public static Expression CallDouble(Type type, string methodName, Expression expression)
+        {
+            return Expression.Call(type.GetMethod(methodName, _oneDouble), ConvertDouble(expression));
+        }
+
+        public static Expression CallDouble(Type type, string methodName, Expression a, Expression b)
+        {
+            return Expression.Call(type.GetMethod(methodName, _twoDoubles), ConvertDouble(a), ConvertDouble(b));
         }
     }
 }

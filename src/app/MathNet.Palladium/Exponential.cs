@@ -29,12 +29,51 @@
 
 using System;
 using System.Linq.Expressions;
+using System.Reflection;
 
 namespace MathNet.ExpressionAlgebra
 {
+    /// <summary>
+    /// Describing an exponential function.
+    /// </summary>
+    public enum ExponentialFunction
+    {
+        Ln,
+        Exp
+    }
+
+    /// <summary>
+    /// Exponential Expression Builder
+    /// </summary>
     public static class Exponential
     {
         static readonly Type _mathType = typeof(Math);
+
+        public static Expression Apply(Expression argument, ExponentialFunction function)
+        {
+            switch(function)
+            {
+                case ExponentialFunction.Ln:
+                    return Ln(argument);
+                case ExponentialFunction.Exp:
+                    return Exp(argument);
+                default:
+                    return ExpressionBuilder.CallDouble(_mathType, function.ToString(), argument);
+            }
+        }
+
+        public static bool TryParse(MethodInfo method, out ExponentialFunction function)
+        {
+            string name = method.Name;
+            if(!Enum.IsDefined(typeof(ExponentialFunction), name))
+            {
+                function = (ExponentialFunction)0;
+                return false;
+            }
+
+            function = (ExponentialFunction)Enum.Parse(typeof(ExponentialFunction), name);
+            return true;
+        }
 
         /// <summary>
         /// Natural Logarithm

@@ -29,10 +29,42 @@
 
 using System;
 using System.Linq.Expressions;
+using System.Reflection;
 
 namespace MathNet.ExpressionAlgebra
 {
     using MathNet.Numerics;
+
+    /// <summary>
+    /// Describing a trigonometric function.
+    /// </summary>
+    public enum TrigonometryFunction
+    {
+        Sine,
+        Cosine,
+        Tangent,
+        Cotangent,
+        Secant,
+        Cosecant,
+        InverseSine,
+        InverseCosine,
+        InverseTangent,
+        InverseCotangent,
+        InverseSecant,
+        InverseCosecant,
+        HyperbolicSine,
+        HyperbolicCosine,
+        HyperbolicTangent,
+        HyperbolicCotangent,
+        HyperbolicSecant,
+        HyperbolicCosecant,
+        InverseHyperbolicSine,
+        InverseHyperbolicCosine,
+        InverseHyperbolicTangent,
+        InverseHyperbolicCotangent,
+        InverseHyperbolicSecant,
+        InverseHyperbolicCosecant
+    }
 
     /// <summary>
     /// Trigonometric Expression Builder
@@ -40,6 +72,24 @@ namespace MathNet.ExpressionAlgebra
     public static class Trigonometry
     {
         static readonly Type _trigType = typeof(Trig);
+
+        public static Expression Apply(Expression argument, TrigonometryFunction function)
+        {
+            return ExpressionBuilder.CallDouble(_trigType, function.ToString(), argument);
+        }
+
+        public static bool TryParse(MethodInfo method, out TrigonometryFunction function)
+        {
+            string name = method.Name;
+            if(!Enum.IsDefined(typeof(TrigonometryFunction), name))
+            {
+                function = (TrigonometryFunction)0;
+                return false;
+            }
+
+            function = (TrigonometryFunction)Enum.Parse(typeof(TrigonometryFunction), name);
+            return true;
+        }
 
         public static Expression Sine(Expression radian)
         {
