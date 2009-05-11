@@ -113,5 +113,17 @@ namespace MathNet.Palladium.Test
             Assert.AreEqual("(1 / a)", factors[6].ToString());
             Assert.AreEqual("(1 / d)", factors[7].ToString());
         }
+
+        [Test]
+        public void TestDependsOn()
+        {
+            Expression<Func<double, double, double>> f1 = (x, y) => x;
+            Assert.IsTrue(Elementary.DependsOn(f1.Body, "x"));
+            Assert.IsFalse(Elementary.DependsOn(f1.Body, "y"));
+
+            Expression<Func<double, double, double>> f2 = (x, y) => Math.Sin(2 + y);
+            Assert.IsFalse(Elementary.DependsOn(f2.Body, "x"));
+            Assert.IsTrue(Elementary.DependsOn(f2.Body, "y"));
+        }
     }
 }

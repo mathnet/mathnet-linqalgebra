@@ -135,5 +135,13 @@ namespace MathNet.ExpressionAlgebra
 
             factors.Add(term);
         }
+
+        public static bool DependsOn(Expression term, string parameterName)
+        {
+            return Visitors.AlgebraicFoldLamda<bool>.Create(
+                (left, right) => left || right,
+                parameter => parameter.Name.Equals(parameterName),
+                constant => false)(term);
+        }
     }
 }
