@@ -56,6 +56,7 @@
     <Compile Include="PartialDerivative.cs" />
     <Compile Include="Trigonometry.cs" />
     <Compile Include="TypeInference.cs" />
+    <Compile Include="Visitors\AlgebraicFoldLamda.cs" />
     <Compile Include="Visitors\AlgebraicManipulator.cs" />
     <Compile Include="Visitors\AlgebraicFold.cs" />
     <Compile Include="Visitors\ExpressionManipulator.cs" />
