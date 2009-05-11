@@ -88,7 +88,8 @@ namespace MathNet.ExpressionAlgebra.Output
         protected override XElement VisitAdd(BinaryExpression term)
         {
             // NOTE: n-ary support
-            return new XElement("apply",
+            return new XElement(
+                "apply",
                 new XElement("plus"),
                 Visit(term.Left),
                 Visit(term.Right));
@@ -96,7 +97,8 @@ namespace MathNet.ExpressionAlgebra.Output
 
         protected override XElement VisitSubtract(BinaryExpression term)
         {
-            return new XElement("apply",
+            return new XElement(
+                "apply",
                 new XElement("minus"),
                 Visit(term.Left),
                 Visit(term.Right));
@@ -109,7 +111,8 @@ namespace MathNet.ExpressionAlgebra.Output
 
         protected override XElement VisitMinus(UnaryExpression term)
         {
-            return new XElement("apply",
+            return new XElement(
+                "apply",
                 new XElement("minus"),
                 Visit(term.Operand));
         }
@@ -117,7 +120,8 @@ namespace MathNet.ExpressionAlgebra.Output
         protected override XElement VisitMultiply(BinaryExpression term)
         {
             // NOTE: n-ary support
-            return new XElement("apply",
+            return new XElement(
+                "apply",
                 new XElement("times"),
                 Visit(term.Left),
                 Visit(term.Right));
@@ -125,7 +129,8 @@ namespace MathNet.ExpressionAlgebra.Output
 
         protected override XElement VisitDivide(BinaryExpression term)
         {
-            return new XElement("apply",
+            return new XElement(
+                "apply",
                 new XElement("divide"),
                 Visit(term.Left),
                 Visit(term.Right));
@@ -133,7 +138,8 @@ namespace MathNet.ExpressionAlgebra.Output
 
         protected override XElement VisitPower(BinaryExpression term)
         {
-            return new XElement("apply",
+            return new XElement(
+                "apply",
                 new XElement("power"),
                 Visit(term.Left),
                 Visit(term.Right));
@@ -141,14 +147,16 @@ namespace MathNet.ExpressionAlgebra.Output
 
         protected override XElement VisitTrigonometry(MethodCallExpression term, TrigonometryFunction function)
         {
-            return new XElement("apply",
+            return new XElement(
+                "apply",
                 new XElement(((MathMLTrigonometryFunction)function).ToString()),
                 Visit(term.Arguments[0]));
         }
 
         protected override XElement VisitExponential(MethodCallExpression term, ExponentialFunction function)
         {
-            return new XElement("apply",
+            return new XElement(
+                "apply",
                 new XElement(((MathMLExponentialFunction)function).ToString()),
                 Visit(term.Arguments[0]));
         }

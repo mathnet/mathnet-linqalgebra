@@ -105,7 +105,6 @@ namespace MathNet.ExpressionAlgebra
                         binaryExpression.Left)));
         }
 
-
         protected override Expression VisitTrigonometry(MethodCallExpression methodCall, TrigonometryFunction function)
         {
             Expression argument = methodCall.Arguments[0];

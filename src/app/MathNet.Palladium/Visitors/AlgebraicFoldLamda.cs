@@ -28,10 +28,7 @@
 //-----------------------------------------------------------------------
 
 using System;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Reflection;
-using System.Collections.Generic;
 
 namespace MathNet.ExpressionAlgebra.Visitors
 {
@@ -41,15 +38,6 @@ namespace MathNet.ExpressionAlgebra.Visitors
         Func<ConstantExpression, T> _foldLeafConst;
         Func<T, T, T> _combine;
 
-        public static Func<Expression, T> Create(
-            Func<T, T, T> combine,
-            Func<ParameterExpression, T> foldParam,
-            Func<ConstantExpression, T> foldConst)
-        {
-            AlgebraicFoldLamda<T> fold = new AlgebraicFoldLamda<T>(combine, foldParam, foldConst);
-            return fold.Visit;
-        }
-
         public AlgebraicFoldLamda(
             Func<T, T, T> combine,
             Func<ParameterExpression, T> foldParam,
@@ -58,6 +46,15 @@ namespace MathNet.ExpressionAlgebra.Visitors
             _combine = combine;
             _foldLeafParam = foldParam;
             _foldLeafConst = foldConst;
+        }
+
+        public static Func<Expression, T> Create(
+            Func<T, T, T> combine,
+            Func<ParameterExpression, T> foldParam,
+            Func<ConstantExpression, T> foldConst)
+        {
+            AlgebraicFoldLamda<T> fold = new AlgebraicFoldLamda<T>(combine, foldParam, foldConst);
+            return fold.Visit;
         }
 
         protected override T Combine(T leftValue, T rightValue)
