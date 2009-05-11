@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{96F70E7A-18FD-4A26-B833-797791DC761A}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -57,6 +57,7 @@
     <Compile Include="Trigonometry.cs" />
     <Compile Include="TypeInference.cs" />
     <Compile Include="Visitors\AlgebraicManipulator.cs" />
+    <Compile Include="Visitors\AlgebraicFold.cs" />
     <Compile Include="Visitors\ExpressionManipulator.cs" />
     <Compile Include="AutoSimplify.cs" />
     <Compile Include="Elementary.cs" />
