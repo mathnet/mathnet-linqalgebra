@@ -138,7 +138,7 @@ namespace MathNet.ExpressionAlgebra
 
         public static bool DependsOn(Expression term, string parameterName)
         {
-            return Visitors.AlgebraicFoldLamda<bool>.Create(
+            return Visitors.AlgebraicFoldLambda<bool>.Create(
                 (left, right) => left || right,
                 parameter => parameter.Name.Equals(parameterName),
                 constant => false)(term);

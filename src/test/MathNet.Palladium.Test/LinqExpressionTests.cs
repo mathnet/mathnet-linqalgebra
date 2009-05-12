@@ -13,7 +13,7 @@ namespace MathNet.Palladium.Test
     public class LinqExpressionTests
     {
         [Test]
-        public void LamdaExpressionOperatorDecompositionTest()
+        public void LambdaExpressionOperatorDecompositionTest()
         {
             Expression<Func<double, double, double>> add = (x, y) => x + y;
 

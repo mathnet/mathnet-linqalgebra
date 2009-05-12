@@ -32,13 +32,13 @@ using System.Linq.Expressions;
 
 namespace MathNet.ExpressionAlgebra.Visitors
 {
-    public class AlgebraicFoldLamda<T> : AlgebraicFold<T>
+    public class AlgebraicFoldLambda<T> : AlgebraicFold<T>
     {
         Func<ParameterExpression, T> _foldLeafParam;
         Func<ConstantExpression, T> _foldLeafConst;
         Func<T, T, T> _combine;
 
-        public AlgebraicFoldLamda(
+        public AlgebraicFoldLambda(
             Func<T, T, T> combine,
             Func<ParameterExpression, T> foldParam,
             Func<ConstantExpression, T> foldConst)
@@ -53,7 +53,7 @@ namespace MathNet.ExpressionAlgebra.Visitors
             Func<ParameterExpression, T> foldParam,
             Func<ConstantExpression, T> foldConst)
         {
-            AlgebraicFoldLamda<T> fold = new AlgebraicFoldLamda<T>(combine, foldParam, foldConst);
+            AlgebraicFoldLambda<T> fold = new AlgebraicFoldLambda<T>(combine, foldParam, foldConst);
             return fold.Visit;
         }
 
